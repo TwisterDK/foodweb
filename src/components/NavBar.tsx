@@ -20,6 +20,7 @@ const NavBar: React.FC<NavBarProps> = ({ onSelectList }) => {
         <button onClick={() => onSelectList('categories')}>Categories</button>
         <button onClick={() => onSelectList('produce')}>Products</button>
         <button onClick={() => onSelectList('cutouts')}>Cutouts</button>
+        <button onClick={() => onSelectList('conversionFactors')}>Conversion Factors</button>
       </div>
       <button 
         onClick={handleLogout} 

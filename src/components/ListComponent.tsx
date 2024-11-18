@@ -34,13 +34,27 @@ const ListComponent: React.FC<ListProps> = ({ type }) => {
 
   const handleCreate = () => {
     if (!newItem || !jwt) return;
-
+  
+    // Check for duplicates in the local `data` state
+    const isDuplicate = data.some(item => item.name.toLowerCase() === newItem.toLowerCase());
+    if (isDuplicate) {
+      alert(`"${newItem}" already exists in the list.`);
+      return;
+    }
+  
+    // Proceed with API call if no duplicates
     axios.post(`${apiUrl}/api/${type}`, { name: newItem }, { headers: { Authorization: `Bearer ${jwt}` } })
       .then(response => {
         setData(prevData => [...prevData, response.data.item]);
         setNewItem('');
       })
-      .catch(error => console.error(`Error creating ${type}:`, error));
+      .catch(error => {
+        console.error(`Error creating ${type}:`, error);
+        // Handle error response for uniqueness constraint (if backend returns one)
+        if (error.response && error.response.status === 400) {
+          alert(`"${newItem}" already exists (server validation).`);
+        }
+      });
   };
 
   const handleEdit = (item: { id: string; name: string }) => {

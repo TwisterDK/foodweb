@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import UsersList from './components/UsersList';
 import ListComponent from './components/ListComponent';
+import ConversionFactorsList from './components/ConversionFactorsList';
 
 const App: React.FC = () => {
   const [selectedList, setSelectedList] = useState<string>('users');
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         {selectedList === 'categories' && <ListComponent type="categories" />}  
         {selectedList === 'produce' && <ListComponent type="produce" />}  
         {selectedList === 'cutouts' && <ListComponent type="cutouts" />}  
+        {selectedList === 'conversionFactors' && <ConversionFactorsList />}
       </div>
     </div>
   );

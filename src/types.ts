@@ -32,3 +32,21 @@ export interface Cutouts {
   name: string;
   // Add other fields if needed, such as description, createdAt, etc.
 }
+
+// Define the ConversionFactors type
+export interface ConversionFactors {
+  id: string;
+  Category: {
+    id: string;
+    name: string;
+  };
+  Produce: {
+    id: string;
+    name: string;
+  };
+  Cutout: {
+    id: string;
+    name: string;
+  };
+  ConversionFactor: number;
+}
